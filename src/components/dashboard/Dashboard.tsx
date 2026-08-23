@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { mockTasks } from '../../data/mockTasks'
 import type { Importance, Task, WorkloadPressure } from '../../types/task'
 import { greetingForNow } from '../../utils/format'
+import { TaskDetailDrawer } from '../detail/TaskDetailDrawer'
 import { AttentionRequired } from './AttentionRequired'
 import { PriorityList } from './PriorityList'
 import { RecentlyDetected } from './RecentlyDetected'
@@ -73,20 +75,41 @@ export function Dashboard() {
     )
     .slice(0, 3)
 
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null)
+  const selectedTask =
+    mockTasks.find((task) => task.id === selectedTaskId) ?? null
+
   return (
     <div className="dashboard">
       <SituationOverview
         greeting={greetingForNow(new Date(nowMs))}
         attentionCount={attentionCount}
       />
-      <AttentionRequired task={attentionTask} nowMs={nowMs} />
+      <AttentionRequired
+        task={attentionTask}
+        nowMs={nowMs}
+        onSelectTask={(task) => setSelectedTaskId(task.id)}
+      />
       <div className="dashboard-split">
-        <PriorityList tasks={priorityTasks} nowMs={nowMs} />
+        <PriorityList
+          tasks={priorityTasks}
+          nowMs={nowMs}
+          onSelectTask={(task) => setSelectedTaskId(task.id)}
+        />
         <aside className="dashboard-rail">
           <WorkloadOverview counts={workloadCounts} />
-          <RecentlyDetected tasks={recentlyDetected} nowMs={nowMs} />
+          <RecentlyDetected
+            tasks={recentlyDetected}
+            nowMs={nowMs}
+            onSelectTask={(task) => setSelectedTaskId(task.id)}
+          />
         </aside>
       </div>
+      <TaskDetailDrawer
+        task={selectedTask}
+        nowMs={nowMs}
+        onClose={() => setSelectedTaskId(null)}
+      />
     </div>
   )
 }

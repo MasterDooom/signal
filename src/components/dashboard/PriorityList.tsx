@@ -10,9 +10,10 @@ import {
 type PriorityListProps = {
   tasks: Task[]
   nowMs: number
+  onSelectTask: (task: Task) => void
 }
 
-export function PriorityList({ tasks, nowMs }: PriorityListProps) {
+export function PriorityList({ tasks, nowMs, onSelectTask }: PriorityListProps) {
   return (
     <section className="priorities" aria-label="Your priorities">
       <div className="section-heading">
@@ -25,35 +26,41 @@ export function PriorityList({ tasks, nowMs }: PriorityListProps) {
         <ul className="priority-list">
           {tasks.map((task) => (
             <li key={task.id} className="priority-row">
-              <div className="priority-main">
-                <span className="priority-type">{formatTaskType(task.type)}</span>
-                <p className="priority-title">{task.title}</p>
-                <p className="priority-source">{task.source}</p>
-              </div>
-              <dl className="priority-meta">
-                <div>
-                  <dt>Due</dt>
-                  <dd>{formatTimeRemaining(task.deadline, nowMs)}</dd>
+              <button
+                type="button"
+                className="priority-row-trigger"
+                onClick={() => onSelectTask(task)}
+              >
+                <div className="priority-main">
+                  <span className="priority-type">{formatTaskType(task.type)}</span>
+                  <p className="priority-title">{task.title}</p>
+                  <p className="priority-source">{task.source}</p>
                 </div>
-                <div>
-                  <dt>Work</dt>
-                  <dd>{formatDuration(task.estimatedDurationMinutes)}</dd>
-                </div>
-                <div>
-                  <dt>Importance</dt>
-                  <dd className={`importance-text importance-${task.importance}`}>
-                    {formatImportance(task.importance)}
-                  </dd>
-                </div>
-                <div>
-                  <dt>Pressure</dt>
-                  <dd
-                    className={`pressure-text pressure-${task.aiAnalysis.workloadPressure}`}
-                  >
-                    {formatPressure(task.aiAnalysis.workloadPressure)}
-                  </dd>
-                </div>
-              </dl>
+                <dl className="priority-meta">
+                  <div>
+                    <dt>Due</dt>
+                    <dd>{formatTimeRemaining(task.deadline, nowMs)}</dd>
+                  </div>
+                  <div>
+                    <dt>Work</dt>
+                    <dd>{formatDuration(task.estimatedDurationMinutes)}</dd>
+                  </div>
+                  <div>
+                    <dt>Importance</dt>
+                    <dd className={`importance-text importance-${task.importance}`}>
+                      {formatImportance(task.importance)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Pressure</dt>
+                    <dd
+                      className={`pressure-text pressure-${task.aiAnalysis.workloadPressure}`}
+                    >
+                      {formatPressure(task.aiAnalysis.workloadPressure)}
+                    </dd>
+                  </div>
+                </dl>
+              </button>
             </li>
           ))}
         </ul>

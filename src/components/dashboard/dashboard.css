@@ -116,6 +116,30 @@
   color: var(--text-muted);
 }
 
+.attention-trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.attention-trigger:hover .attention-title,
+.attention-trigger:focus-visible .attention-title {
+  color: var(--accent);
+}
+
+.attention-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+
 .importance-tag {
   font-size: 11px;
   letter-spacing: 0.14em;
@@ -173,15 +197,38 @@
 }
 
 .priority-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 16px 24px;
   padding: 16px 0;
   border-top: 1px solid var(--border);
 }
 
 .priority-row:last-child {
   border-bottom: 1px solid var(--border);
+}
+
+.priority-row-trigger {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 16px 24px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.priority-row-trigger:hover .priority-title,
+.priority-row-trigger:focus-visible .priority-title {
+  color: var(--accent);
+}
+
+.priority-row-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 6px;
 }
 
 .priority-type {
@@ -278,15 +325,38 @@
 }
 
 .recent-row {
-  display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  gap: 12px;
   padding: 12px 0;
   border-top: 1px solid var(--border);
 }
 
 .recent-row:last-child {
   border-bottom: 1px solid var(--border);
+}
+
+.recent-row-trigger {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.recent-row-trigger:hover .recent-title,
+.recent-row-trigger:focus-visible .recent-title {
+  color: var(--accent);
+}
+
+.recent-row-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 6px;
 }
 
 .recent-row time {
@@ -323,7 +393,7 @@
     gap: 36px;
   }
 
-  .priority-row {
+  .priority-row-trigger {
     grid-template-columns: 1fr;
   }
 }

@@ -72,3 +72,13 @@ export function formatPressure(pressure: WorkloadPressure): string {
   if (pressure === 'moderate') return 'Moderate'
   return 'High'
 }
+
+export function formatAbsoluteDeadline(iso: string): string {
+  return new Date(iso).toLocaleString(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  })
+}
