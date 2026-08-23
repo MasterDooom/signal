@@ -1,3 +1,4 @@
+import { Dashboard } from './components/dashboard/Dashboard'
 import './index.css'
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         </div>
       </header>
       <main className="app-main">
-        <div className="app-main-placeholder" aria-hidden="true" />
+        <Dashboard />
       </main>
     </div>
   )
